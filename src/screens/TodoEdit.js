@@ -1,13 +1,8 @@
 import React, { useState } from "react";
 import { Button, TextInput, View, Alert } from "react-native";
-import { todoApi, useUpdateTodoMutation } from "../services/todo-api";
-import { useDispatch } from "react-redux";
 
-const TodoEdit = ({ route }) => {
-  const [title, setTitle] = useState(route.params.title);
-  const id = route.params.id;
-  const [updateTodo, { data, isLoading: isUpdating }] = useUpdateTodoMutation();
-  const dispatch = useDispatch();
+const TodoEdit = () => {
+  const [title, setTitle] = useState("");
 
   const onSubmit = () => {
     if (title === "") {
@@ -15,11 +10,7 @@ const TodoEdit = ({ route }) => {
     } else {
       // Submit form (e.g., post to JSON server)
       // Remember to reset the form after successfully submitting
-      updateTodo({
-        id,
-        title,
-        completed: false,
-      });
+      console.log(`Submitted: ${title}`);
       setTitle("");
     }
   };
@@ -27,7 +18,7 @@ const TodoEdit = ({ route }) => {
   return (
     <View style={{ flex: 1, padding: 16 }}>
       <TextInput
-        defaultValue={title}
+        value={title}
         onChangeText={text => setTitle(text)}
         placeholder="Enter Todo Title"
         style={{
@@ -35,9 +26,10 @@ const TodoEdit = ({ route }) => {
           borderColor: "gray",
           borderWidth: 1,
           marginBottom: 20,
+          padding: 10,
         }}
       />
-      <Button title="Edit Todo" onPress={onSubmit} />
+      <Button title="Update" onPress={onSubmit} />
     </View>
   );
 };

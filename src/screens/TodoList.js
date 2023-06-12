@@ -6,28 +6,14 @@ import {
   FlatList,
   StyleSheet,
   Pressable,
-  ActivityIndicator,
 } from "react-native";
-import { useSelector } from "react-redux";
-import { selectTheme } from "../slices/theme";
-import { useGetAllTodosQuery } from "../services/todo-api";
 
 const TodoListScreen = ({ navigation }) => {
-  const {
-    data: todos,
-    isLoading,
-    error,
-    isSuccess,
-    isFetching,
-  } = useGetAllTodosQuery();
-
-  if (isLoading || isFetching) {
-    return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <ActivityIndicator size="large" color="#00ff00" />
-      </View>
-    );
-  }
+  const todos = [
+    { id: "1", title: "Buy groceries" },
+    { id: "2", title: "Read a book" },
+    // Add more todos as needed
+  ];
 
   const deleteTodo = id => {
     // Logic to delete todo
@@ -37,7 +23,10 @@ const TodoListScreen = ({ navigation }) => {
   const renderItem = ({ item }) => (
     <Pressable
       onPress={() => {
-        navigation.navigate("TodoView", { id: item.id, title: item.title });
+        navigation.navigate("TodoView", {
+          id: item.id,
+          title: item.title,
+        });
       }}
       style={styles.item}
     >
@@ -47,18 +36,21 @@ const TodoListScreen = ({ navigation }) => {
   );
 
   return (
-    <View>
-      <FlatList
-        data={todos}
-        renderItem={renderItem}
-        keyExtractor={item => item.id.toString()}
-      />
-      <Button title="Add Todo" onPress={() => navigation.navigate("TodoAdd")} />
-      <Button
-        title="Go to dummy"
-        onPress={() => navigation.navigate("Dummy")}
-      />
-    </View>
+    <FlatList
+      data={todos}
+      renderItem={renderItem}
+      keyExtractor={item => item.id.toString()}
+      ListFooterComponent={() => {
+        return (
+          <View style={{ marginTop: 20 }}>
+            <Button
+              title="Add a new todo"
+              onPress={() => navigation.navigate("TodoAdd")}
+            />
+          </View>
+        );
+      }}
+    />
   );
 };
 

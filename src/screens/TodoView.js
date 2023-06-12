@@ -1,29 +1,13 @@
 import React from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  Button,
-  ActivityIndicator,
-} from "react-native";
-import {
-  todoApi,
-  useGetTodoByIdQuery,
-  useUpdateTodoMutation,
-} from "../services/todo-api";
-import { useDispatch } from "react-redux";
+import { View, Text, StyleSheet, Button } from "react-native";
 
-const TodoViewScreen = ({ navigation, route }) => {
-  const id = route.params.id;
-  const { data: todo, isLoading, isFetching } = useGetTodoByIdQuery(id);
-  const [updateTodo, { data, isLoading: isUpdating }] = useUpdateTodoMutation();
-  const dispatch = useDispatch();
-
-  console.log({ todo });
-
-  if (isLoading || isUpdating || isFetching) {
-    return <ActivityIndicator />;
-  }
+const TodoViewScreen = ({ navigation }) => {
+  // Dummy data
+  const todo = {
+    id: "1",
+    title: "Buy groceries",
+    completed: false,
+  };
 
   return (
     <View style={styles.container}>
@@ -31,25 +15,18 @@ const TodoViewScreen = ({ navigation, route }) => {
       <Text style={styles.status}>
         Status: {todo.completed ? "Completed" : "Not Completed"}
       </Text>
-      <Button
-        title="Edit"
-        onPress={() =>
-          navigation.navigate("TodoEdit", { id: todo.id, title: todo.title })
-        }
-      />
-      <Button
-        title="Mark as Completed"
-        onPress={() => {
-          updateTodo({
-            id: todo.id,
-            title: todo.title,
-            completed: !todo.completed,
-          }).then(res => {
-            console.log({ res });
-            // dispatch(todoApi.util.invalidateTags([{ type: "Todos", id: id }])); // Invalidate cache
-          });
-        }}
-      />
+      <View style={{ marginTop: 20 }}>
+        <Button
+          title="Edit"
+          onPress={() => {
+            navigation.navigate("TodoEdit", {
+              id: todo.id,
+              title: todo.title,
+            });
+          }}
+        />
+        <Button title="Mark as completed" onPress={() => {}} />
+      </View>
     </View>
   );
 };
