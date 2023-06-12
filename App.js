@@ -7,7 +7,6 @@ import TodoEdit from "./src/screens/TodoEdit";
 import TodoViewScreen from "./src/screens/TodoView";
 import { Provider } from "react-redux";
 import { store } from "./src/store";
-import DummyScreen from "./src/screens/DummyScreen";
 
 // Create the stack navigator
 const Stack = createNativeStackNavigator();
@@ -21,7 +20,6 @@ const App = () => {
           <Stack.Screen name="TodoAdd" component={TodoAdd} />
           <Stack.Screen name="TodoEdit" component={TodoEdit} />
           <Stack.Screen name="TodoView" component={TodoViewScreen} />
-          <Stack.Screen name="Dummy" component={DummyScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

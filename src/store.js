@@ -5,7 +5,6 @@ import reactotron from "./reactotron";
 export const store = configureStore({
   reducer: {
     theme: themeReducer,
-    [todoApi.reducerPath]: todoApi.reducer,
   },
   enhancers: [reactotron.createEnhancer()],
 });
