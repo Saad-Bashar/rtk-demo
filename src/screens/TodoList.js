@@ -30,7 +30,7 @@ const TodoListScreen = ({ navigation }) => {
       }}
       style={styles.item}
     >
-      <Text style={styles.title}>{item.title}</Text>
+      <Text style={styles.title}>{item.title}</Text> top
       <Button title="Delete" onPress={() => deleteTodo(item.id)} />
     </Pressable>
   );
