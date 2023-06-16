@@ -38,7 +38,7 @@ const TodoViewScreen = ({ navigation, route }) => {
         }
       />
       <Button
-        title="Mark as Completed"
+        title={todo.completed ? "Mark as Not Completed" : "Mark as Completed"}
         onPress={() => {
           updateTodo({
             id: todo.id,

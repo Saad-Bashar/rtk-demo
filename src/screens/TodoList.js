@@ -10,7 +10,10 @@ import {
 } from "react-native";
 import { useSelector } from "react-redux";
 import { selectTheme } from "../slices/theme";
-import { useGetAllTodosQuery } from "../services/todo-api";
+import {
+  useDeleteTodoMutation,
+  useGetAllTodosQuery,
+} from "../services/todo-api";
 
 const TodoListScreen = ({ navigation }) => {
   const {
@@ -20,6 +23,8 @@ const TodoListScreen = ({ navigation }) => {
     isSuccess,
     isFetching,
   } = useGetAllTodosQuery();
+
+  const [deleteItem, { isLoading: isDeleting }] = useDeleteTodoMutation();
 
   if (isLoading || isFetching) {
     return (
@@ -32,6 +37,7 @@ const TodoListScreen = ({ navigation }) => {
   const deleteTodo = id => {
     // Logic to delete todo
     console.log(`Deleting ${id}`);
+    deleteItem(id);
   };
 
   const renderItem = ({ item }) => (
@@ -41,7 +47,11 @@ const TodoListScreen = ({ navigation }) => {
       }}
       style={styles.item}
     >
-      <Text style={styles.title}>{item.title}</Text>
+      <View>
+        <Text style={styles.title}>{item.title}</Text>
+        <Text>{item.completed ? "DONE" : "NOT DONE"}</Text>
+      </View>
+
       <Button title="Delete" onPress={() => deleteTodo(item.id)} />
     </Pressable>
   );

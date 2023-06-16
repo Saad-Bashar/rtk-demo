@@ -1,29 +1,34 @@
 {
   "todos": [
     {
-      "title": "Changing the way it works.",
-      "completed": false,
-      "id": 1
+      "title": "Do the laundry and get rest lol",
+      "completed": true,
+      "id": 2
     },
     {
-      "id": 2,
-      "title": "Do the laundry",
-      "completed": false
-    },
-    {
-      "id": 3,
-      "title": "Finish report",
-      "completed": false
-    },
-    {
-      "id": 4,
       "title": "Read a book",
-      "completed": true
+      "completed": true,
+      "id": 4
     },
     {
       "id": 5,
       "title": "Write a letter",
       "completed": false
+    },
+    {
+      "title": "My New ToDo",
+      "completed": false,
+      "id": 6
+    },
+    {
+      "title": "Ototo",
+      "completed": false,
+      "id": 7
+    },
+    {
+      "title": "Test refreshing todo",
+      "completed": false,
+      "id": 8
     }
   ]
 }

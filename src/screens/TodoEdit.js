@@ -1,13 +1,17 @@
 import React, { useState } from "react";
 import { Button, TextInput, View, Alert } from "react-native";
-import { todoApi, useUpdateTodoMutation } from "../services/todo-api";
+import {
+  todoApi,
+  useGetTodoByIdQuery,
+  useUpdateTodoMutation,
+} from "../services/todo-api";
 import { useDispatch } from "react-redux";
 
 const TodoEdit = ({ route }) => {
   const [title, setTitle] = useState(route.params.title);
   const id = route.params.id;
   const [updateTodo, { data, isLoading: isUpdating }] = useUpdateTodoMutation();
-  const dispatch = useDispatch();
+  const { data: todoItem, isLoading, isFetching } = useGetTodoByIdQuery(id);
 
   const onSubmit = () => {
     if (title === "") {
@@ -18,7 +22,7 @@ const TodoEdit = ({ route }) => {
       updateTodo({
         id,
         title,
-        completed: false,
+        completed: todoItem.completed,
       });
       setTitle("");
     }

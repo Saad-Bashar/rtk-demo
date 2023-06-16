@@ -1,16 +1,22 @@
 import React, { useState } from "react";
-import { Button, TextInput, View, Alert } from "react-native";
+import {
+  Button,
+  TextInput,
+  View,
+  Alert,
+  ActivityIndicator,
+} from "react-native";
+import { useAddTodoMutation } from "../services/todo-api";
 
 const TodoAdd = () => {
   const [title, setTitle] = useState("");
+  const [addToDo, { isLoading }] = useAddTodoMutation();
 
   const onSubmit = () => {
     if (title === "") {
       Alert.alert("Error", "Please enter a title");
     } else {
-      // Submit form (e.g., post to JSON server)
-      // Remember to reset the form after successfully submitting
-      console.log(`Submitted: ${title}`);
+      addToDo({ title });
       setTitle("");
     }
   };
@@ -29,7 +35,11 @@ const TodoAdd = () => {
           padding: 10,
         }}
       />
-      <Button title="Create a new todo" onPress={onSubmit} />
+      {isLoading ? (
+        <ActivityIndicator />
+      ) : (
+        <Button title="Create a new todo" onPress={onSubmit} />
+      )}
     </View>
   );
 };
