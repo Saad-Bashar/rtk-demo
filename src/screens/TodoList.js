@@ -20,20 +20,22 @@ const TodoListScreen = ({ navigation }) => {
     console.log(`Deleting ${id}`);
   };
 
-  const renderItem = ({ item }) => (
-    <Pressable
-      onPress={() => {
-        navigation.navigate("TodoView", {
-          id: item.id,
-          title: item.title,
-        });
-      }}
-      style={styles.item}
-    >
-      <Text style={styles.title}>{item.title}</Text> top
-      <Button title="Delete" onPress={() => deleteTodo(item.id)} />
-    </Pressable>
-  );
+  const renderItem = ({ item }) => {
+    return (
+      <Pressable
+        style={styles.item}
+        onPress={() => navigation.navigate("TodoView", { id: item.id })}
+      >
+        <Text style={styles.title}>{item.title}</Text>
+        <Button
+          title="Delete"
+          onPress={() => {
+            deleteTodo();
+          }}
+        />
+      </Pressable>
+    );
+  };
 
   return (
     <FlatList
