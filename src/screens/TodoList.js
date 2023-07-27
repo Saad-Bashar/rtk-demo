@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Button,
   Text,
@@ -14,19 +14,15 @@ import {
   useDeleteTodoMutation,
   useGetAllTodosQuery,
 } from "../services/todo-api";
+import { SafeAreaView } from "react-native-safe-area-context";
+import useInfiniteScroll from "./useInifinteScroll";
 
 const TodoListScreen = ({ navigation }) => {
-  const {
-    data: todos,
-    isLoading,
-    error,
-    isSuccess,
-    isFetching,
-  } = useGetAllTodosQuery();
+  const { data, isLoading } = useGetAllTodosQuery();
 
   const [deleteItem, { isLoading: isDeleting }] = useDeleteTodoMutation();
 
-  if (isLoading || isFetching) {
+  if (isLoading) {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
         <ActivityIndicator size="large" color="#00ff00" />
@@ -47,7 +43,7 @@ const TodoListScreen = ({ navigation }) => {
       }}
       style={styles.item}
     >
-      <View>
+      <View style={{ flex: 1 }}>
         <Text style={styles.title}>{item.title}</Text>
         <Text>{item.completed ? "DONE" : "NOT DONE"}</Text>
       </View>
@@ -57,18 +53,15 @@ const TodoListScreen = ({ navigation }) => {
   );
 
   return (
-    <View>
+    <SafeAreaView style={{ flex: 1 }}>
       <FlatList
-        data={todos}
+        data={data}
         renderItem={renderItem}
         keyExtractor={item => item.id.toString()}
       />
+      <View style={{ paddingTop: 200 }}></View>
       <Button title="Add Todo" onPress={() => navigation.navigate("TodoAdd")} />
-      <Button
-        title="Go to dummy"
-        onPress={() => navigation.navigate("Dummy")}
-      />
-    </View>
+    </SafeAreaView>
   );
 };
 

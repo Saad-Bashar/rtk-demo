@@ -1,34 +1,54 @@
 {
   "todos": [
     {
-      "title": "Do the laundry and get rest lol",
-      "completed": true,
+      "title": "Buy groceries",
+      "completed": false,
+      "id": 1
+    },
+    {
+      "title": "Pay bills",
+      "completed": false,
       "id": 2
     },
     {
-      "title": "Read a book",
-      "completed": true,
+      "title": "Schedule dentist appointment",
+      "completed": false,
+      "id": 3
+    },
+    {
+      "title": "Walk the dog",
+      "completed": false,
       "id": 4
     },
     {
-      "id": 5,
-      "title": "Write a letter",
-      "completed": false
+      "title": "Call Mom",
+      "completed": false,
+      "id": 5
     },
     {
-      "title": "My New ToDo",
+      "title": "Finish report for work",
       "completed": false,
       "id": 6
     },
     {
-      "title": "Ototo",
+      "title": "Read a book",
       "completed": false,
       "id": 7
     },
     {
-      "title": "Test refreshing todo",
+      "title": "Do laundry",
       "completed": false,
       "id": 8
+    },
+    {
+      "title": "Organize desk",
+      "completed": false,
+      "id": 9
+    },
+    {
+      "title": "Plan vacation",
+      "completed": false,
+      "id": 10
     }
   ]
 }

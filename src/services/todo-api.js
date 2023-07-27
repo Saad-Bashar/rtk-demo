@@ -4,7 +4,9 @@ import { api } from "./api";
 export const todoApi = api.injectEndpoints({
   endpoints: builder => ({
     getAllTodos: builder.query({
-      query: () => "/todos",
+      query: () => {
+        return "/todos";
+      },
       providesTags: ["Todos"],
     }),
     addTodo: builder.mutation({
