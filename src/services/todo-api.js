@@ -27,18 +27,18 @@ export const todoApi = api.injectEndpoints({
         method: "PUT",
         body: { title, completed },
       }),
-      // async onQueryStarted({ id }, { dispatch, queryFulfilled }) {
-      //   try {
-      //     const { data: updatedTodo } = await queryFulfilled;
-      //     dispatch(
-      //       api.util.updateQueryData("getTodoById", id, draft => {
-      //         Object.assign(draft, updatedTodo);
-      //       })
-      //     );
-      //   } catch {}
-      // },
+      async onQueryStarted({ id }, { dispatch, queryFulfilled }) {
+        try {
+          const { data: updatedTodo } = await queryFulfilled;
+          dispatch(
+            api.util.updateQueryData("getTodoById", id, draft => {
+              Object.assign(draft, updatedTodo);
+            })
+          );
+        } catch {}
+      },
       invalidatesTags: (_result, _error, { id }) => {
-        return [{ type: "Todos", id: id }, "Todos"];
+        return [{ type: "Todos", id: id }];
       },
     }),
     deleteTodo: builder.mutation({
